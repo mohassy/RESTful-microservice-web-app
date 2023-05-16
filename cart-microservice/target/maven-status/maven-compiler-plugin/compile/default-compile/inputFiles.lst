@@ -1,0 +1,12 @@
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/persistence/CRUD_Cart.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/persistence/CRUD_Device.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/business/CartManager.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/business/Messaging.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/helpers/User.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/helpers/Device.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/endpoint/MyAppServletContextListener.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/persistence/CRUD_User.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/endpoint/ApplicationConfig.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/helpers/Buyer.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/helpers/Cart.java
+/home/student/NetBeansProjects/Lab 5/CartManagement/src/main/java/com/cartmanagement/endpoint/CartResource.java

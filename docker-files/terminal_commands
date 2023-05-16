@@ -1,0 +1,43 @@
+
+file dump commands:
+
+sudo mysqldump --databases FEMS --user=root --password=student > frontend.sql
+sudo mysqldump --databases RMS --user=root --password=student > register.sql
+sudo mysqldump --databases CMS --user=root --password=student > cart.sql
+
+docker build commands:
+
+sudo docker build . --file Dockerfile-cartdb --tag msiadhas/coe692lab5:cartdb
+sudo docker build . --file Dockerfile-frontenddb --tag msiadhas/coe692lab5:frontenddb
+sudo docker build . --file Dockerfile-registerdb --tag msiadhas/coe692lab5:registerdb
+sudo docker build . --file Dockerfile-cartservice --tag msiadhas/coe692lab5:cartservice
+sudo docker build . --file Dockerfile-frontendservice --tag msiadhas/coe692lab5:frontendservice
+sudo docker build . --file Dockerfile-registerservice --tag msiadhas/coe692lab5:registerservice
+
+
+docker push commands:
+
+sudo docker login --username=msiadhas
+
+sudo docker push msiadhas/coe692lab5:cartdb
+sudo docker push msiadhas/coe692lab5:cartservice
+sudo docker push msiadhas/coe692lab5:frontenddb
+sudo docker push msiadhas/coe692lab5:frontendservice
+sudo docker push msiadhas/coe692lab5:registerdb
+sudo docker push msiadhas/coe692lab5:registerservice
+
+docker remove command:
+
+docker rmi [image id]
+
+cluster config command:
+
+kubectl apply -f lab5deployment.yaml
+
+pod delete command:
+
+kubectl delete pod --all
+
+initialize cluster command:
+
+gcloud container clusters create coe692lab5-cluster --num-nodes=3 --zone northamerica-northeast1-a

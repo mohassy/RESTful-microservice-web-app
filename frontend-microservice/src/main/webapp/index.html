@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+            crossorigin="anonymous"
+            />
+        <link rel="stylesheet" href="./resources/css/index.css"/>
+        <title>Electro Buy</title>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col masthead">
+                </div>
+            </div>
+            <div class="row logo mx-auto">
+                <div class="col">
+                    <img
+                        src="resources/images/logo.jpg"
+                        class="img-fluid rounded mx-auto p-5"
+                        />
+                </div>
+            </div>
+            <div class="container d-flex justify-content-center col-3">
+                <form action="FrontEnd" method="post" class="form align-items-center">
+                    <input type="hidden" name="pageName" value="login">
+                    <label for="email" class="form-label" id="email">Email</label>
+                    <input
+                        class="form-control mb-2"
+                        type="text"
+                        id="email"
+                        name="email"
+                        size="50"
+                        />
+                    <label for="password" class="form-label" id="password"
+                           >Password</label
+                    >
+                    <input
+                        class="form-control mb-2"
+                        type="password"
+                        id="password"
+                        name="password"
+                        size="50"
+                        />
+                    <input class="form-check-input" type="radio" id="buyer" name="user_class" value="2" Checked />
+                    <label class="form-check-label" for="buyer">Buyer</label><br/>
+                    <input class="form-check-input" type="radio" id="admin" name="user_class" value="1"  />
+                    <label class="form-check-label" for="admin">Administrator</label> <br/>
+                    <input type="submit" value="Login" class="btn btn-warning mt-3" />
+                </form>
+            </div>
+        </div>
+        
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"
+        ></script>
+        
+    </body>
+</html>

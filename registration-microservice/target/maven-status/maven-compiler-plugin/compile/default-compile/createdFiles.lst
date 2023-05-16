@@ -1,0 +1,7 @@
+com/registration/business/Messaging.class
+com/registration/endpoint/RegisterResource.class
+com/registration/helpers/User.class
+com/registration/helpers/Buyer.class
+com/registration/business/Register.class
+com/registration/persistence/CRUD_User.class
+com/registration/endpoint/ApplicationConfig.class

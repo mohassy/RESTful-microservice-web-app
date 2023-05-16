@@ -1,0 +1,5 @@
+FROM tomcat:8.5-jdk11-openjdk
+
+COPY ./Registration-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/Registration.war
+
+EXPOSE 8080

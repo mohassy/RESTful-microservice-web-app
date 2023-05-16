@@ -1,0 +1,262 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cartdb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cartdb
+spec:
+  selector:
+    app: cartdb
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cartdb
+spec:
+  selector:
+    matchLabels:
+      app: cartdb
+  template:
+    metadata:
+      labels:
+        app: cartdb
+    spec:
+      containers:
+        - name: cardb
+          image: msiadhas/coe692lab5:cartdb
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: storage
+              mountPath: /data/cartdb
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: cartdb-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cart
+  template:
+    metadata:
+      labels:
+        app: cart
+    spec:
+      containers:
+        - name: cart
+          image: msiadhas/coe692lab5:cartservice
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_URL
+              value: cartdb:3306
+            - name: kubeMQAddress
+              value: 10.24.14.133:50000
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registerdb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registerdb
+spec:
+  selector:
+    app: registerdb
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registerdb
+spec:
+  selector:
+    matchLabels:
+      app: registerdb
+  template:
+    metadata:
+      labels:
+        app: registerdb
+    spec:
+      containers:
+        - name: registerdb
+          image: msiadhas/coe692lab5:registerdb
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: storage
+              mountPath: /data/registerdb
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: registerdb-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: register
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: register
+  template:
+    metadata:
+      labels:
+        app: register
+    spec:
+      containers:
+        - name: register
+          image: msiadhas/coe692lab5:registerservice
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_URL
+              value: registerdb:3306
+            - name: kubeMQAddress
+              value: 10.24.14.133:50000
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: frontenddb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontenddb
+spec:
+  selector:
+    app: frontenddb
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontenddb
+spec:
+  selector:
+    matchLabels:
+      app: frontenddb
+  template:
+    metadata:
+      labels:
+        app: frontenddb
+    spec:
+      containers:
+        - name: frontenddb
+          image: msiadhas/coe692lab5:frontenddb
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: storage
+              mountPath: /data/frontenddb
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: frontenddb-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: msiadhas/coe692lab5:frontendservice
+          ports:
+            - containerPort: 8080
+          env:
+            - name: cartservice
+              value: cart:80
+
+            - name: registerservice
+              value: register:80
+
+            - name: DB_URL
+              value: frontenddb:3306
+
+            - name: kubeMQAddress
+              value: 10.24.14.133:50000
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart
+spec:
+  selector:
+    app: cart
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: register
+spec:
+  selector:
+    app: register
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer

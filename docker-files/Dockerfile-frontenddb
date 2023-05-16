@@ -1,0 +1,9 @@
+FROM mysql:8.0.23
+
+
+ENV MYSQL_DATABASE=FEMS
+ENV    MYSQL_ROOT_PASSWORD=student
+
+COPY frontend.sql /docker-entrypoint-initdb.d
+
+EXPOSE 3306
